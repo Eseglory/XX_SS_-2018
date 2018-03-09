@@ -163,7 +163,7 @@ namespace CMD
                 string endaddresses = "</addresses>";
 
                 string Helement19 = "<email>" + Helementitem19.Trim() + "</email>";
-                string Helement20 = "<occupation>" + Helementitem10.Trim() + "</occupation>";
+                string Helement20 = "<occupation>" + Helementitem20.Trim() + "</occupation>";
                 string Helement21 = "<employer_name>" + Helementitem21.Trim() + "</employer_name>";
                 string employer_address_id = headerrp.employer_address_id;
 
