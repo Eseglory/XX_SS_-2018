@@ -11,7 +11,7 @@ namespace CMD
 {
     class Program
     {
-        OleDbConnection cn = new OleDbConnection("Provider=MSDAORA; DATA SOURCE=EDEVELOPER:1521/xe;DBA PRIVILEGE=SYSDBA;USER ID=SYS;Password=eseosa12345");
+        OleDbConnection cn = new OleDbConnection("Provider=MSDAORA; DATA SOURCE=administrator:1521/xe;DBA PRIVILEGE=SYSDBA;USER ID=SYS;Password=eseosa12345");
         public static string RandomNumbers(int length)
         {
             const string valid = "0123456789";
@@ -23,11 +23,13 @@ namespace CMD
             }
             return res.ToString();
         }
-        static void Main(string[] args)
+
+        
+          static void Main(string[] args)
         {
-            OracleConnection conn = new OracleConnection("DATA SOURCE=EDEVELOPER:1521/xe;DBA PRIVILEGE=SYSDBA;USER ID=SYS;Password=eseosa12345");
+            OracleConnection conn = new OracleConnection("DATA SOURCE=administrator:1521/xe;DBA PRIVILEGE=SYSDBA;USER ID=SYS;Password=eseosa12345");
             OracleDataAdapter Headerdr = new OracleDataAdapter("select * from SYS.REPORT_ENTITY", conn);
-            OracleDataAdapter dr = new OracleDataAdapter("select * from SYS.CTR_TRANSACTIONS WHERE FROM_FUNDS_CODE = 'K'", conn);
+            OracleDataAdapter dr = new OracleDataAdapter("select * from SYS.CTR_TRANSACTIONS WHERE FROM_FUNDS_CODE = 'P'", conn);
             DataSet Headerds = new DataSet();
             DataSet ds = new DataSet();
             try
@@ -266,7 +268,7 @@ namespace CMD
                         string amount_local = rp.amount_local = AmountLocale.ToString();
                         string from_funds_code = rp.from_funds_code = rec.Field<string>("FROM_FUNDS_CODE");
                         string from_funds_comment = rp.from_funds_comment = rec.Field<string>("FROM_FUNDS_COMMENTS".ToUpper());
-                        from_funds_comment = from_funds_comment.Replace("&","AND");
+                        from_funds_comment = from_funds_comment.Replace("&", "AND");
                         string institution_name = rp.institution_name = rec.Field<string>("FROM_INSTITUTION_NAME".ToUpper());
                         string institution_code = rp.institution_code = rec.Field<string>("FROM_INSTITUTION_CODE".ToUpper());
                         string branch = rp.branch = rec.Field<string>("TO_BRANCH".ToUpper());
@@ -301,11 +303,11 @@ namespace CMD
 
                         string Tlast_name = rp.Tlast_name = rec.Field<string>("TO_PERSON_LAST_NAME".ToUpper());
                         DateTime? SignDate = rec.Field<DateTime?>("SIGNATORY_DOB".ToUpper());
-                        if(SignDate == null)
+                        if (SignDate == null)
                         {
                             SignDate = DateTime.Now;
                         }
-                        if(transmode_code == null || transmode_code == "")
+                        if (transmode_code == null || transmode_code == "")
                         {
                             transmode_code = "C";
                         }
@@ -339,7 +341,7 @@ namespace CMD
                         }
                         string occupation = rp.occupation = rec.Field<string>("SIGNATORY_OCCUPATION".ToUpper());
                         string type = rp.type = "O";//rec.Field<string>("type".ToUpper());
-                        string number = rp.number = "AT" + RandomNumbers(8) ; //rec.Field<string>("enumber".ToUpper());
+                        string number = rp.number = "AT" + RandomNumbers(8); //rec.Field<string>("enumber".ToUpper());
                         string issued_by = rp.issued_by = institution_name;//rec.Field<string>("issued_by".ToUpper());
                         string issue_country = rp.issue_country = rec.Field<string>("from_country".ToUpper());
                         DateTime OpenDate = rec.Field<DateTime>("TO_ACCT_OPENED".ToUpper());
@@ -393,13 +395,32 @@ namespace CMD
                         string SignTile = rp.to_country = rec.Field<string>("SIGNATORY_TITLE".ToUpper());
                         string SignFName = rp.to_country = rec.Field<string>("SIGNATORY_FIRST_NAME".ToUpper());
                         string SignLName = rp.to_country = rec.Field<string>("SIGNATORY_LAST_NAME".ToUpper());
-                        DateTime SignDOB =  rec.Field<DateTime>("SIGNATORY_DOB".ToUpper());
+                        DateTime SignDOB = rec.Field<DateTime>("SIGNATORY_DOB".ToUpper());
                         string SignNationality = rp.to_country = rec.Field<string>("SIGNATORY_NATIONALITY".ToUpper());
                         string SignResidence = rp.to_country = rec.Field<string>("SIGNATORY_RESIDENCE".ToUpper());
                         SignResidence = SignResidence.Trim();
                         SignNationality = SignNationality.Trim();
                         string SignOccupation = rp.to_country = rec.Field<string>("SIGNATORY_OCCUPATION".ToUpper());
-                        if(SignOccupation == null || SignOccupation == "") { SignOccupation = "Not Defined"; }
+                        if (SignOccupation == null || SignOccupation == "") { SignOccupation = "Not Defined"; }
+
+                        #region Foreign Currency
+
+                        double result_account_currency = 0;
+                        double currency_rate = 0;
+
+                        if (currency_code == "USD") {
+                            currency_rate = 362;
+                        }
+
+                        result_account_currency = (double)AmountLocale / currency_rate;
+
+                        result_account_currency = Math.Round(result_account_currency, 2);
+
+                        string convert_foreign = result_account_currency.ToString();
+                        string convert_foreign_rate = convert_foreign.ToString();
+
+                        #endregion
+
                         #region Brake Date
                         string YSignDOB = SignDOB.Year.ToString();
                         string MSignDOB = SignDOB.Month.ToString();
@@ -437,7 +458,18 @@ namespace CMD
                         string t_from_my_client = "<t_from_my_client>";
                         string Bodyement10 = "<from_funds_code>" + from_funds_code.Trim() + "</from_funds_code>";
                         string Bodyement11 = "<from_funds_comment>" + from_funds_comment.Trim() + "</from_funds_comment>";
+
+                        /*** Foreign Account Node Begins ***/
+                        string from_foreign_currency = "<from_foreign_currency>";
+                        string Bodyements2 = "<foreign_currency_code>" + currency_code.Trim() + "</foreign_currency_code>";
+                        string Bodyements3 = "<foreign_amount>" + convert_foreign.Trim() + "</foreign_amount>";
+                        string Bodyements4 = "<foreign_exchange_rate>" + convert_foreign_rate.Trim() + "</foreign_exchange_rate>";
+                        string end_from_foreign_currency = "</from_foreign_currency>";
+
+                        /***  Foreign Account Node Ends  ***/
+
                         #region From Account
+
                         string from_account = "<from_account>";
                         string Bodyement12 = "<institution_name>" + institution_name.Trim() + "</institution_name>";
                         string Bodyement13 = "<institution_code>" + institution_code.Trim() + "</institution_code>";
@@ -458,19 +490,25 @@ namespace CMD
                         {
                             client_number = "Not Defined";
                         }
-                        if(personal_account_type == null || personal_account_type == "")
+                        if (personal_account_type == null || personal_account_type == "")
                         {
                             personal_account_type = "A";
                         }
+
+
                         string Bodyement15 = "<account>" + account.Trim() + "</account>";
                         string Bodyement16 = "<currency_code>" + currency_code.Trim() + "</currency_code>";
                         string Bodyement17 = "<account_name>" + account_name.Trim() + "</account_name>";
                         string Bodyement18 = "<client_number>" + client_number.Trim() + "</client_number>";
                         string Bodyement1_8 = "<personal_account_type>" + personal_account_type.Trim() + "</personal_account_type>";
+
+
                         string t_entity = "<t_entity>";
                         string Bodyement19 = "<name>" + name.Trim() + "</name>";
                         string Bodyement20 = "<incorporation_number>" + incorporation_number.Trim() + "</incorporation_number>";
                         string Bodyement21 = "<business>" + business.Trim() + "</business>";
+
+
                         string phonesM = "<phones>";
                         string phoneM = "<phone>";
                         string Bodyement22 = "<tph_contact_type>" + tph_contact_type.Trim() + "</tph_contact_type>";
@@ -478,6 +516,8 @@ namespace CMD
                         string Bodyement24 = "<tph_number>" + tph_number.Trim() + "</tph_number>";
                         string end_phone = "</phone>";
                         string end_phones = "</phones>";
+
+
                         string addresses = "<addresses>";
                         string eaddress = "<address>";
                         string Bodyement25 = "<address_type>" + address_type.Trim() + "</address_type>";
@@ -498,6 +538,8 @@ namespace CMD
                         string Bodyement33 = "<last_name>" + dlast_name.Trim() + "</last_name>";
                         string end_director_id = "</director_id>";
                         string end_t_entity = "</t_entity>";
+
+
                         string signatory = "<signatory>";
                         string t_person = "<t_person>";
                         #region not defined
@@ -536,7 +578,7 @@ namespace CMD
                         {
                             nationality1 = "Not Defined";
                         }
-                        if(tph_contact_type == "xx" || tph_contact_type == null)
+                        if (tph_contact_type == "xx" || tph_contact_type == null)
                         {
                             tph_contact_type = "B";
                         }
@@ -553,17 +595,22 @@ namespace CMD
                             tph_contact_type = "B";
                         }
                         #endregion
+                        /**/
+                        string Bodyement3Y4 = "<account_name>" + account_name.Trim() + "</account_name>";
+                        /**/
                         string Bodyement34 = "<title>" + title.Trim() + "</title>";
-                        string Bodyement35 = "<first_name>" + first_name.Trim() + "</first_name>";
-                        string Bodyement36 = "<last_name>" + last_name.Trim() + "</last_name>";
-                        string Bodyement37 = "<birthdate>" + birthdate.Trim() + "</birthdate>";
+                        string Bodyement35 = "<first_name>" + SignFName.Trim() + "</first_name>";
+                        string Bodyement36 = "<last_name>" + SignLName.Trim() + "</last_name>";
+                        string Bodyement37 = "<birthdate>" + SignDOBNazo.Trim() + "</birthdate>";
                         string Bodyement38 = "<nationality1>" + nationality1.Trim() + "</nationality1>";
                         string Bodyement39 = "<residence>" + residence.Trim() + "</residence>";
-                        if(occupation == string.Empty || occupation == null || occupation == "")
+                        if (occupation == string.Empty || occupation == null || occupation == "")
                         {
                             occupation = "Not Defined";
                         }
                         string Bodyement40 = "<occupation>" + occupation.Trim() + "</occupation>";
+
+
                         string identification = "<identification>";
                         string Bodyement41 = "<type>" + type.Trim() + "</type>";
                         if (number == string.Empty || number == null || number == "")
@@ -578,6 +625,8 @@ namespace CMD
                         string Bodyement43 = "<issued_by>" + issued_by.Trim() + "</issued_by>";
                         string Bodyement4_3 = "<issue_country>" + issue_country.Trim() + "</issue_country>";
                         string end_identification = "</identification>";
+
+
                         string end_t_person = "</t_person>";
                         string end_signatory = "</signatory>";
                         string Bodyement44 = "<opened>" + opened.Trim().ToString() + "</opened>";
@@ -608,28 +657,31 @@ namespace CMD
                         string Bodyement53 = "<account>" + Taccount.Trim() + "</account>";
                         string Bodyement5_3 = "<currency_code>" + currency_code.Trim() + "</currency_code>";
                         string Bodyement54 = "<account_name>" + Taccount_name.Trim() + "</account_name>";
-                        if(Taccount_name != "" || Taccount_name == "") { Taccount_name = "Not Defined"; }
+                        if (Taccount_name != "" || Taccount_name == "") { Taccount_name = "Not Defined"; }
                         string Bodyement5_4A = "<client_number>" + client_number.Trim() + "</client_number>";
                         string Bodyement5_4B = "<personal_account_type>" + personal_account_type + "</personal_account_type>";
                         //if (Taccount != "" || Taccount != null)
                         //{
-                            string Tsignatory = "<signatory>";
-                            string Tt_person = "<t_person>";
-                            string Bodyement5_4C = "<title>" + SignTile.Trim() + "</title>";
+                        string Tsignatory = "<signatory>";
+                        string Tt_person = "<t_person>";
+                        string Bodyement5_4C = "<title>" + SignTile.Trim() + "</title>";
                         //}
                         string Bodyement5_4D = "<first_name>" + SignFName.Trim() + "</first_name>";
-                            string Bodyement5_4E = "<last_name>" + SignLName.Trim() + "</last_name>";
+                        string Bodyement5_4E = "<last_name>" + SignLName.Trim() + "</last_name>";
+
+                        string Bodyement5_4YD = "<first_name>" + first_name.Trim() + "</first_name>";
+                        string Bodyement5_4YE = "<last_name>" + last_name.Trim() + "</last_name>";
                         //if (Taccount != "" || Taccount != null)
                         //{
-                            string Bodyement5_4F = "<birthdate>" + SignDOBNazo.Trim() + "</birthdate>";
-                            string Bodyement5_4G = "<nationality1>" + SignNationality.Trim() + "</nationality1>";
-                            string Bodyement5_4H = "<residence>" + SignResidence + "</residence>";
-                            string Bodyement5_4I = "<occupation>" + SignOccupation + "</occupation>";
-                            string end_Tt_person = "</t_person>";
-                            string end_Tsignatory = "</signatory>";
-                            string Bodyement5_4J = "<opened>" + opened + "</opened>";
-                            string Bodyement5_4K = "<balance>" + balance + "</balance>";
-                            string Bodyement5_4L = "<status_code>" + status_code + "</status_code>";
+                        string Bodyement5_4F = "<birthdate>" + SignDOBNazo.Trim() + "</birthdate>";
+                        string Bodyement5_4G = "<nationality1>" + SignNationality.Trim() + "</nationality1>";
+                        string Bodyement5_4H = "<residence>" + SignResidence + "</residence>";
+                        string Bodyement5_4I = "<occupation>" + SignOccupation + "</occupation>";
+                        string end_Tt_person = "</t_person>";
+                        string end_Tsignatory = "</signatory>";
+                        string Bodyement5_4J = "<opened>" + opened + "</opened>";
+                        string Bodyement5_4K = "<balance>" + balance + "</balance>";
+                        string Bodyement5_4L = "<status_code>" + status_code + "</status_code>";
                         //}
                         string Bodyement55 = "<beneficiary>" + beneficiary.Trim() + "</beneficiary>";
                         string end_to_account = "</to_account>";
@@ -648,15 +700,47 @@ namespace CMD
                           + Bodyement5_4F + Bodyement5_4G + Bodyement5_4H + Bodyement5_4I
                           + end_Tt_person + end_Tsignatory + Bodyement5_4J + Bodyement5_4K
                           + Bodyement5_4L + end_to_account;
+
+                        /**************** I declared this so i can call the foreign currency ***************/
+
+                        string foreign_calling = "";
+
+                        if (personal_account_type == "P")
+                        {
+
+                            foreign_calling = from_foreign_currency + Bodyements2 + Bodyements3 +
+                                                 Bodyements4 + end_from_foreign_currency;
+
+                        }
+
+                        /**************** I declared this so i can call the foreign currency end ***************/
+
+                        /***** I declared this so i can call the t_entity if the account is corporate *********/
+
+                        string t_entity_calling = "";
+
+                        if (personal_account_type == "D") {
+
+                            t_entity_calling =
+                              t_entity + Bodyement19 + Bodyement20 + Bodyement21 + phonesM + phoneM + Bodyement22 + Bodyement23 + Bodyement24
+                              + end_phone + end_phones + addresses + eaddress + Bodyement25 + Bodyement26 + Bodyement27
+                              + Bodyement28 + Bodyement29 + end_address + end_addresses + Bodyement30 + Bodyement31
+                              + director_id + Bodyement32 + Bodyement33 + end_director_id + end_t_entity;
+                        }
+
+                        /***** I declared this so i can call the t_entity if the account is corporate end *********/
+
+                        string identification_calling = "";
+                        if (personal_account_type == "D")
+                        {
+                            identification_calling = identification + Bodyement41 + Bodyement42 + Bodyement43
+                           + Bodyement4_3 + end_identification;
+                        }
+
                         string f_accH = from_account + Bodyement12 + Bodyement13 + Bodyement14 + Bodyement15
-                           + Bodyement16 + Bodyement17 + Bodyement18 + Bodyement1_8 + t_entity + Bodyement19 +
-                           Bodyement20 + Bodyement21 + phonesM + phoneM + Bodyement22 + Bodyement23 + Bodyement24
-                           + end_phone + end_phones + addresses + eaddress + Bodyement25 + Bodyement26 + Bodyement27
-                           + Bodyement28 + Bodyement29 + end_address + end_addresses + Bodyement30 + Bodyement31
-                           + director_id + Bodyement32 + Bodyement33 + end_director_id + end_t_entity + signatory
+                           + Bodyement16 + Bodyement17 + Bodyement18 + Bodyement1_8 + t_entity_calling + signatory
                            + t_person + Bodyement34 + Bodyement35 + Bodyement36 + Bodyement37 + Bodyement38
-                           + Bodyement39 + Bodyement40 + identification + Bodyement41 + Bodyement42 + Bodyement43
-                           + Bodyement4_3 + end_identification + end_t_person + end_signatory + Bodyement44 + Bodyement45
+                           + Bodyement39 + Bodyement40 + identification_calling + end_t_person + end_signatory + Bodyement44 + Bodyement45
                            + Bodyement46 + end_from_account;
 
                         #region Conditions
@@ -667,9 +751,22 @@ namespace CMD
                                 Bodyement5_4D + Bodyement5_4E
                                 + "</to_person>";
                         }
+                        /*THIS IS FOR CASH WIDTHRAWAL TRANSACTIONS*/
+                        if (Tinstitution_name.Trim() == "CASH/CHEQUE" || Taccount.Trim() == "CASH/CHEQUE" )
+                        {
+                            t_toH = "<to_person>" +
+                                Bodyement5_4YD + Bodyement5_4YE
+                                + "</to_person>";
+                        }
+                        /*THIS IS FOR CASH WIDTHRAWAL TRANSACTIONS ENDS*/
                         if (account == "Not Defined" || account == "" || account.Trim() == "CASH/CHEQUE" || account == "CASH" || account == "CHEQUE")
                         {
-                            f_accH =  "<from_person>" + Bodyement35 + Bodyement36 + "</from_person >" ;
+                            f_accH = "<from_person>" + Bodyement35 + Bodyement36 + "</from_person >";
+                        }
+
+                        else if(from_funds_code == "P" || account.Trim() == "CASH/CHEQUE"  )
+                        {
+                            f_accH = "<from_person>" + Bodyement3Y4 + "</from_person >";
                         }
 
                         if (account != "" && account != null && institution_name == "SKYE BANK NIG PLC")
@@ -697,7 +794,7 @@ namespace CMD
                         #region LOAD DATA
                         string LD = transaction + Bodyement1 + Bodyement2 + Bodyement3 + Bodyement4 + Bodyement5
                            + Bodyement6 + Bodyement7 + Bodyement8 + Bodyement9 + t_from_my_client + Bodyement10
-                           + Bodyement11 + f_accH + Bodyement47 + end_t_from_my_client + t_to
+                           + Bodyement11 + foreign_calling + f_accH + Bodyement47 + end_t_from_my_client + t_to
                            + Bodyement48 + Bodyement49 + t_toH + Bodyement56 + Bodyement5_6 + Bodyement57;
                         LD = LD.Replace("&", "AND");
                         #endregion
@@ -723,6 +820,9 @@ namespace CMD
             }
 
         }
+
+       
+
         private static DateTime GetFormatedDate(string currentformatdate)
         {
             string[] dateparts = currentformatdate.Split('/');
