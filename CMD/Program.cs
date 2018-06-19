@@ -29,7 +29,7 @@ namespace CMD
         {
             OracleConnection conn = new OracleConnection("DATA SOURCE=administrator:1521/xe;DBA PRIVILEGE=SYSDBA;USER ID=SYS;Password=eseosa12345");
             OracleDataAdapter Headerdr = new OracleDataAdapter("select * from SYS.REPORT_ENTITY", conn);
-            OracleDataAdapter dr = new OracleDataAdapter("select * from SYS.CTR_TRANSACTIONS WHERE FROM_FUNDS_CODE = 'P'", conn);
+            OracleDataAdapter dr = new OracleDataAdapter("select * from SYS.CTR_TRANSACTIONS WHERE CODE_FROM_TRANS = 'SKTN' ", conn);
             DataSet Headerds = new DataSet();
             DataSet ds = new DataSet();
             try
@@ -266,6 +266,13 @@ namespace CMD
                         string transmode_code = rp.transmode_code = rec.Field<string>("TRANSMODE_CODE");
                         decimal AmountLocale = rec.Field<decimal>("AMOUNT_LOCAL");
                         string amount_local = rp.amount_local = AmountLocale.ToString();
+
+
+
+
+                        decimal AmountForeign = rec.Field<decimal>("AMOUNT_FOREIGN");
+                        string amount_foreign = rp.amount_foreign = AmountForeign.ToString();
+
                         string from_funds_code = rp.from_funds_code = rec.Field<string>("FROM_FUNDS_CODE");
                         string from_funds_comment = rp.from_funds_comment = rec.Field<string>("FROM_FUNDS_COMMENTS".ToUpper());
                         from_funds_comment = from_funds_comment.Replace("&", "AND");
@@ -376,6 +383,9 @@ namespace CMD
                         string Taccount = rp.Taccount = rec.Field<string>("TO_ACCOUNT".ToUpper());
                         string Taccount_name = rp.Taccount_name = rec.Field<string>("TO_ACCOUNT_NAME".ToUpper());
                         string beneficiary = rp.beneficiary = rec.Field<string>("TO_CLIENT_NUMBER".ToUpper());
+                        string primaryMedium = rp.primaryMedium = rec.Field<string>("PRIMARY_MEDIUM".ToUpper());
+                        string cdi = rp.cdi = rec.Field<string>("CDI".ToUpper());
+                        string code_from_trans = rp.code_from_trans = rec.Field<string>("CODE_FROM_TRANS".ToUpper());
                         string to_country = rp.to_country = rec.Field<string>("TO_ACCOUNT_COUNTRY".ToUpper());
 
                         if (incorporation_country_code.Trim() == "UK")
@@ -406,15 +416,13 @@ namespace CMD
                         #region Foreign Currency
 
                         double result_account_currency = 0;
-                        double currency_rate = 0;
 
-                        if (currency_code == "USD") {
-                            currency_rate = 362;
+                        if (currency_code != "NGN") {
+                            result_account_currency = (double)AmountLocale / (double)AmountForeign;
+
+                            result_account_currency = Math.Round(result_account_currency);
                         }
 
-                        result_account_currency = (double)AmountLocale / currency_rate;
-
-                        result_account_currency = Math.Round(result_account_currency, 2);
 
                         string convert_foreign = result_account_currency.ToString();
                         string convert_foreign_rate = convert_foreign.ToString();
@@ -462,11 +470,13 @@ namespace CMD
                         /*** Foreign Account Node Begins ***/
                         string from_foreign_currency = "<from_foreign_currency>";
                         string Bodyements2 = "<foreign_currency_code>" + currency_code.Trim() + "</foreign_currency_code>";
-                        string Bodyements3 = "<foreign_amount>" + convert_foreign.Trim() + "</foreign_amount>";
+                        string Bodyements3 = "<foreign_amount>" + amount_foreign.Trim() + "</foreign_amount>";
                         string Bodyements4 = "<foreign_exchange_rate>" + convert_foreign_rate.Trim() + "</foreign_exchange_rate>";
                         string end_from_foreign_currency = "</from_foreign_currency>";
 
                         /***  Foreign Account Node Ends  ***/
+
+                        /***** From ACCOUNT REGION BEGINS ****/
 
                         #region From Account
 
@@ -500,6 +510,7 @@ namespace CMD
                         string Bodyement16 = "<currency_code>" + currency_code.Trim() + "</currency_code>";
                         string Bodyement17 = "<account_name>" + account_name.Trim() + "</account_name>";
                         string Bodyement18 = "<client_number>" + client_number.Trim() + "</client_number>";
+                        string Bodyement18YS = "<beneficiary>" + from_funds_comment.Trim() + "</beneficiary>";
                         string Bodyement1_8 = "<personal_account_type>" + personal_account_type.Trim() + "</personal_account_type>";
 
 
@@ -633,7 +644,14 @@ namespace CMD
                         string Bodyement45 = "<balance>" + balance.Trim() + "</balance>";
                         string Bodyement46 = "<status_code>" + status_code.Trim() + "</status_code>";
                         string end_from_account = "</from_account>";
+
+                        string Bodyement1Y2 = "<institution_name>" + institution_name.Trim() + "</institution_name>";
+                        string Bodyement1Y3 = "<institution_code>" + institution_code.Trim() + "</institution_code>";
+                        string Bodyement1Y5 = "<account>" + account.Trim() + "</account>";
+                        string Bodyement1Y7 = "<account_name>" + account_name.Trim() + "</account_name>";
                         #endregion
+
+                        /*** From Account Region Ends***/
                         string Bodyement47 = "<from_country>" + from_country.Trim() + "</from_country>";
                         string end_t_from_my_client = "</t_from_my_client>";
                         string t_to = "<t_to>";
@@ -671,6 +689,10 @@ namespace CMD
 
                         string Bodyement5_4YD = "<first_name>" + first_name.Trim() + "</first_name>";
                         string Bodyement5_4YE = "<last_name>" + last_name.Trim() + "</last_name>";
+
+
+                        string Bodyement5_4YSD = "<first_name>" + Tfirst_name.Trim() + "</first_name>";
+                        string Bodyement5_4YSE = "<last_name>" + Tlast_name.Trim() + "</last_name>";
                         //if (Taccount != "" || Taccount != null)
                         //{
                         string Bodyement5_4F = "<birthdate>" + SignDOBNazo.Trim() + "</birthdate>";
@@ -693,33 +715,15 @@ namespace CMD
                         //string t_toH =
                         //  to_account + Bodyement50 + Bodyement51 + Bodyement52 + Bodyement53 +
                         //   Bodyement54 + Bodyement55 + end_to_account;
-                        string t_toH =
-                          to_account + Bodyement50 + Bodyement51 + Bodyement52 + Bodyement53 +
-                          Bodyement5_3 + Bodyement54 + Bodyement5_4A + Bodyement5_4B + Tsignatory
-                          + Tt_person + Bodyement5_4C + Bodyement5_4D + Bodyement5_4E
-                          + Bodyement5_4F + Bodyement5_4G + Bodyement5_4H + Bodyement5_4I
-                          + end_Tt_person + end_Tsignatory + Bodyement5_4J + Bodyement5_4K
-                          + Bodyement5_4L + end_to_account;
-
-                        /**************** I declared this so i can call the foreign currency ***************/
-
-                        string foreign_calling = "";
-
-                        if (personal_account_type == "P")
-                        {
-
-                            foreign_calling = from_foreign_currency + Bodyements2 + Bodyements3 +
-                                                 Bodyements4 + end_from_foreign_currency;
-
-                        }
-
-                        /**************** I declared this so i can call the foreign currency end ***************/
 
                         /***** I declared this so i can call the t_entity if the account is corporate *********/
 
+                        /********** I am declaring this session in order to remove all issue when director part is em ********/
+
                         string t_entity_calling = "";
 
-                        if (personal_account_type == "D") {
+                        if (personal_account_type == "D")
+                        {
 
                             t_entity_calling =
                               t_entity + Bodyement19 + Bodyement20 + Bodyement21 + phonesM + phoneM + Bodyement22 + Bodyement23 + Bodyement24
@@ -737,12 +741,82 @@ namespace CMD
                            + Bodyement4_3 + end_identification;
                         }
 
-                        string f_accH = from_account + Bodyement12 + Bodyement13 + Bodyement14 + Bodyement15
+
+                        /*THIS IS FOR TRANSFER with CODE_FROM_TRANS = FTOT*/
+                        string t_toH = "";
+                        if (Tinstitution_name.Trim() == "SKYE BANK NIG PLC")
+                        {
+                            t_toH =
+                             to_account + Bodyement50 + Bodyement51 + Bodyement52 + Bodyement53 +
+                             Bodyement5_3 + Bodyement54 + Bodyement5_4A + Bodyement5_4B + t_entity_calling + Tsignatory
+                             + Tt_person + Bodyement5_4C + Bodyement5_4D + Bodyement5_4E
+                             + Bodyement5_4F + Bodyement5_4G + Bodyement5_4H + Bodyement5_4I
+                             + end_Tt_person + end_Tsignatory + Bodyement5_4J + Bodyement5_4K
+                             + Bodyement5_4L + end_to_account;
+                        }
+
+
+                        /*TRANSFER with CODE_FROM_TRANS = FTOTR ENDS*/
+                        else
+                        {
+                            t_toH =
+                       to_account + Bodyement50 + Bodyement51 + Bodyement52 + Bodyement53 +
+                       Bodyement5_3 + Bodyement54 + Bodyement5_4A + Bodyement5_4B + t_entity_calling + Tsignatory
+                       + Tt_person + Bodyement5_4C + Bodyement5_4D + Bodyement5_4E
+                       + Bodyement5_4F + Bodyement5_4G + Bodyement5_4H + Bodyement5_4I
+                       + end_Tt_person + end_Tsignatory + Bodyement5_4J + Bodyement5_4K
+                       + Bodyement5_4L + end_to_account;
+                        }
+
+                        /**************** I declared this so i can call the foreign currency ***************/
+
+                        string foreign_calling = "";
+
+                        if (currency_code != "NGN")
+                        {
+
+                            foreign_calling = from_foreign_currency + Bodyements2 + Bodyements3 +
+                                                 Bodyements4 + end_from_foreign_currency;
+
+                        }
+
+                        /**************** I declared this so i can call the foreign currency end ***************/
+
+                        
+
+                        string f_accH = "";
+
+                        if (from_funds_code != "B")
+                        { 
+
+                            f_accH = from_account + Bodyement12 + Bodyement13 + Bodyement14 + Bodyement15
                            + Bodyement16 + Bodyement17 + Bodyement18 + Bodyement1_8 + t_entity_calling + signatory
                            + t_person + Bodyement34 + Bodyement35 + Bodyement36 + Bodyement37 + Bodyement38
                            + Bodyement39 + Bodyement40 + identification_calling + end_t_person + end_signatory + Bodyement44 + Bodyement45
                            + Bodyement46 + end_from_account;
+                        }
 
+                       else if (from_funds_code == "B")
+                        {
+                            f_accH = from_account + Bodyement12 + Bodyement13 + Bodyement15 + Bodyement17 + 
+                                     end_from_account;
+                        }
+                        
+
+                       if (from_funds_code == "L" && account_name == "TERM DEPOSITS")
+                        {
+                            f_accH = from_account + Bodyement12 + Bodyement13 + Bodyement15 + Bodyement17 +
+                                      Bodyement18YS +
+                                     end_from_account;
+                        }
+
+
+                        if (from_funds_code == "L" && institution_name != "SKYE BANK NIG PLC")
+                        {
+                            f_accH = from_account + Bodyement12 + Bodyement13 + Bodyement15 + Bodyement17 +
+                                      
+                                     end_from_account;
+                        }
                         #region Conditions
 
                         if (Taccount == "Not Defined" || Taccount.Trim() == "" || Taccount.Trim() == "CASH/CHEQUE" || Taccount == "CASH" || Taccount == "CHEQUE")
@@ -758,15 +832,24 @@ namespace CMD
                                 Bodyement5_4YD + Bodyement5_4YE
                                 + "</to_person>";
                         }
+
                         /*THIS IS FOR CASH WIDTHRAWAL TRANSACTIONS ENDS*/
+
+                        /*THIS IS FOR OUT GOING FUNDS TRANSFER*/
+                        if (cdi.Trim() == "DEBIT" && primaryMedium.Trim() == "MISC")
+                        {
+                            t_toH = "<to_account>" +
+                                Bodyement50 + Bodyement51 +Bodyement53 + Bodyement54 
+                                + "</to_account>";
+                        }
+
+
+                        /*OUTGOING FUNDS TRANSFER ENDS*/
+
+
                         if (account == "Not Defined" || account == "" || account.Trim() == "CASH/CHEQUE" || account == "CASH" || account == "CHEQUE")
                         {
                             f_accH = "<from_person>" + Bodyement35 + Bodyement36 + "</from_person >";
-                        }
-
-                        else if(from_funds_code == "P" || account.Trim() == "CASH/CHEQUE"  )
-                        {
-                            f_accH = "<from_person>" + Bodyement3Y4 + "</from_person >";
                         }
 
                         if (account != "" && account != null && institution_name == "SKYE BANK NIG PLC")
@@ -774,11 +857,20 @@ namespace CMD
                             t_from_my_client = "<t_from_my_client>";
                             end_t_from_my_client = "</t_from_my_client>";
                         }
+
                         else
                         {
                             t_from_my_client = "<t_from>";
                             end_t_from_my_client = "</t_from>";
                         }
+                        
+                        
+                        if (from_funds_code == "L" && account_name == "TERM DEPOSITS" && institution_name == "SKYE BANK NIG PLC")
+                        {
+                            t_from_my_client = "<t_from>";
+                            end_t_from_my_client = "</t_from>";
+                        }
+
                         if (Taccount != "" && account != null && Tinstitution_name == "SKYE BANK NIG PLC")
                         {
                             t_to = "<t_to_my_client>";

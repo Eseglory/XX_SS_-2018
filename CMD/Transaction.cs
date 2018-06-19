@@ -121,6 +121,10 @@ namespace CMD
         // </t_to>
         public string end_t_to = "</t_to>";
         // </transaction>
+        public string primaryMedium { get; set; }
+        public string cdi { get; set; }
+        public string code_from_trans { get; set; }
+        public string amount_foreign { get; set; }
         public string end_transaction = "</transaction>";
 
         #endregion
