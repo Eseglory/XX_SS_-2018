@@ -1,0 +1,578 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AMLCORE.CTR_TRANSACTIONS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CTR_TRANSACTIONS">
+          <Key>
+            <PropertyRef Name="TRANSACTIONNUMBER" />
+            <PropertyRef Name="AMOUNT_LOCAL" />
+            <PropertyRef Name="TO_CURRENCY_CODE" />
+            <PropertyRef Name="TO_ACCOUNT_COUNTRY" />
+          </Key>
+          <Property Name="TRANSACTIONNUMBER" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="TRANSACTION_DESCRIPTION" Type="varchar2" MaxLength="255" />
+          <Property Name="DATE_TRANSACTION" Type="timestamp" Precision="6" />
+          <Property Name="TELLER" Type="char" MaxLength="50" />
+          <Property Name="AUTHORIZED" Type="char" MaxLength="13" />
+          <Property Name="LATE_DEPOSIT" Type="varchar2" MaxLength="5" />
+          <Property Name="DATE_POSTING" Type="date" />
+          <Property Name="TRANSMODE_CODE" Type="char" MaxLength="1" />
+          <Property Name="AMOUNT_LOCAL" Type="number" Precision="18" Scale="5" Nullable="false" />
+          <Property Name="FROM_FUNDS_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="FROM_FUNDS_COMMENTS" Type="varchar2" MaxLength="255" />
+          <Property Name="FROM_INSTITUTION_NAME" Type="varchar2" MaxLength="450" />
+          <Property Name="FROM_INSTITUTION_CODE" Type="varchar2" MaxLength="30" />
+          <Property Name="FROM_ACCOUNT" Type="varchar2" MaxLength="600" />
+          <Property Name="FROM_ACCOUNT_NAME" Type="varchar2" MaxLength="4000" />
+          <Property Name="FROM_COUNTRY" Type="char" MaxLength="3" />
+          <Property Name="TO_FUNDS_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="TO_FUNDS_COMMENTS" Type="varchar2" MaxLength="255" />
+          <Property Name="TO_INSTITUTION_NAME" Type="varchar2" MaxLength="450" />
+          <Property Name="TO_INSTITUTION_CODE" Type="varchar2" MaxLength="30" />
+          <Property Name="TO_BRANCH" Type="varchar2" MaxLength="143" />
+          <Property Name="TO_ACCOUNT" Type="varchar2" MaxLength="200" />
+          <Property Name="TO_CURRENCY_CODE" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="TO_ACCOUNT_NAME" Type="varchar2" MaxLength="150" />
+          <Property Name="TO_CLIENT_NUMBER" Type="char" MaxLength="11" />
+          <Property Name="PERSONAL_ACCOUNT_TYPE" Type="char" MaxLength="1" />
+          <Property Name="ENT_NAME" Type="varchar2" MaxLength="200" />
+          <Property Name="ENT_INCORP_NO" Type="varchar2" MaxLength="50" />
+          <Property Name="ENT_BUSINESS" Type="varchar2" MaxLength="200" />
+          <Property Name="ENT_CONTACT_TYPE" Type="varchar2" MaxLength="3" />
+          <Property Name="ENT_COMM_TYPE" Type="varchar2" MaxLength="3" />
+          <Property Name="ENT_PHONE" Type="varchar2" MaxLength="20" />
+          <Property Name="ENT_ADDRSS_TYPE" Type="varchar2" MaxLength="3" />
+          <Property Name="ENT_ADDRESS" Type="varchar2" MaxLength="250" />
+          <Property Name="ENT_CITY" Type="varchar2" MaxLength="50" />
+          <Property Name="ENT_COUNTRY_CODE" Type="varchar2" MaxLength="5" />
+          <Property Name="ENT_STATE" Type="varchar2" MaxLength="3" />
+          <Property Name="ENT_INCORP_STATE" Type="varchar2" MaxLength="3" />
+          <Property Name="ENT_INCORP_COUNTRY_CODE" Type="varchar2" MaxLength="5" />
+          <Property Name="ENT_DIR_1ST_NAME" Type="varchar2" MaxLength="150" />
+          <Property Name="ENT_DIR_LAST_NAME" Type="varchar2" MaxLength="150" />
+          <Property Name="SIGNATORY_TITLE" Type="char" MaxLength="3" />
+          <Property Name="SIGNATORY_FIRST_NAME" Type="varchar2" MaxLength="200" />
+          <Property Name="SIGNATORY_LAST_NAME" Type="varchar2" MaxLength="200" />
+          <Property Name="SIGNATORY_DOB" Type="date" />
+          <Property Name="SIGNATORY_NATIONALITY" Type="char" MaxLength="3" />
+          <Property Name="SIGNATORY_RESIDENCE" Type="char" MaxLength="3" />
+          <Property Name="SIGNATORY_OCCUPATION" Type="varchar2" MaxLength="35" />
+          <Property Name="TO_ACCT_OPENED" Type="date" />
+          <Property Name="TO_ACCT_BALANCE" Type="char" MaxLength="20" />
+          <Property Name="TO_ACCT_STATUS_CODE" Type="varchar2" MaxLength="3" />
+          <Property Name="TO_ACCOUNT_COUNTRY" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="CDI" Type="varchar2" MaxLength="20" />
+          <Property Name="PRIMARY_MEDIUM" Type="varchar2" MaxLength="30" />
+          <Property Name="DATE_KEY" Type="number" Precision="8" Scale="0" />
+          <Property Name="FROM_PERSON_FIRST_NAME" Type="varchar2" MaxLength="100" />
+          <Property Name="FROM_PERSON_LAST_NAME" Type="varchar2" MaxLength="100" />
+          <Property Name="TO_PERSON_FIRST_NAME" Type="varchar2" MaxLength="100" />
+          <Property Name="TO_PERSON_LAST_NAME" Type="varchar2" MaxLength="100" />
+          <Property Name="AMOUNT_FOREIGN" Type="number" Precision="18" Scale="5" />
+          <Property Name="CODE_FROM_TRANS" Type="varchar2" MaxLength="20" />
+          <Property Name="FIRST_NAME" Type="varchar2" MaxLength="200" />
+          <Property Name="LAST_NAME" Type="varchar2" MaxLength="200" />
+          <Property Name="POLARIS_ACCOUNT" Type="varchar2" MaxLength="50" />
+          <Property Name="BANK_CUST_BRANCH" Type="varchar2" MaxLength="400" />
+          <Property Name="BANK_CUST_NAME" Type="varchar2" MaxLength="400" />
+          <Property Name="BANK_NAME" Type="varchar2" MaxLength="400" />
+          <Property Name="BANK_CODE" Type="varchar2" MaxLength="40" />
+          <Property Name="BANK_SWIFT_CODE" Type="varchar2" MaxLength="40" />
+          <Property Name="EXTERNAL_ACC" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AMLCORE.REPORT_ENTITY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="REPORT_ENTITY">
+          <Key>
+            <PropertyRef Name="SUBMISSION_CODE" />
+            <PropertyRef Name="REPORT_CODE" />
+            <PropertyRef Name="SUBMISSION_DATE" />
+            <PropertyRef Name="CURRENCY_CODE_LOCAL" />
+            <PropertyRef Name="GENDER" />
+            <PropertyRef Name="E_FIRST_NAME" />
+            <PropertyRef Name="E_MIDDLE_NAME" />
+            <PropertyRef Name="E_LAST_NAME" />
+            <PropertyRef Name="E_BIRTHDATE" />
+            <PropertyRef Name="E_NATIONALITY1" />
+            <PropertyRef Name="ADDRESS" />
+            <PropertyRef Name="CITY" />
+            <PropertyRef Name="COUNTRY_CODE" />
+            <PropertyRef Name="COUNTRY_STATE" />
+            <PropertyRef Name="EMP_NAME" />
+            <PropertyRef Name="EMP_ADDRESS" />
+            <PropertyRef Name="EMP_CITY" />
+            <PropertyRef Name="EMP_COUNTRY_CODE" />
+            <PropertyRef Name="EMP_COUNTRY_STATE" />
+            <PropertyRef Name="REASON" />
+            <PropertyRef Name="ACTION" />
+          </Key>
+          <Property Name="RENTITY_ID" Type="varchar2" MaxLength="4" />
+          <Property Name="SUBMISSION_CODE" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="REPORT_CODE" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="SUBMISSION_DATE" Type="timestamp" Precision="6" Nullable="false" />
+          <Property Name="CURRENCY_CODE_LOCAL" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="GENDER" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="E_TITLE" Type="varchar2" MaxLength="5" />
+          <Property Name="E_FIRST_NAME" Type="varchar2" MaxLength="200" Nullable="false" />
+          <Property Name="E_MIDDLE_NAME" Type="varchar2" MaxLength="200" Nullable="false" />
+          <Property Name="E_LAST_NAME" Type="varchar2" MaxLength="200" Nullable="false" />
+          <Property Name="E_BIRTHDATE" Type="date" Nullable="false" />
+          <Property Name="BIRTH_PLACE" Type="varchar2" MaxLength="20" />
+          <Property Name="MOTHERS_NAME" Type="varchar2" MaxLength="200" />
+          <Property Name="PASSPORT_NUMBER" Type="varchar2" MaxLength="20" />
+          <Property Name="PASSPORT_COUNTRY" Type="varchar2" MaxLength="20" />
+          <Property Name="ID_NUMBER" Type="number" Precision="20" Scale="0" />
+          <Property Name="E_NATIONALITY1" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="RESISDENCE" Type="char" MaxLength="4" />
+          <Property Name="TPH_CONTACT_TYPE" Type="char" MaxLength="3" />
+          <Property Name="TPH_COMMUNICATION_TYPE" Type="char" MaxLength="3" />
+          <Property Name="TPH_NUMBER" Type="varchar2" MaxLength="20" />
+          <Property Name="ADDRESS_TYPE" Type="char" MaxLength="3" />
+          <Property Name="ADDRESS" Type="varchar2" MaxLength="500" Nullable="false" />
+          <Property Name="CITY" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="COUNTRY_CODE" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="COUNTRY_STATE" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar2" MaxLength="50" />
+          <Property Name="OCCUPATION" Type="varchar2" MaxLength="50" />
+          <Property Name="EMP_NAME" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="EMP_ADDRESS_TYPE" Type="char" MaxLength="3" />
+          <Property Name="EMP_ADDRESS" Type="varchar2" MaxLength="500" Nullable="false" />
+          <Property Name="EMP_CITY" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="EMP_COUNTRY_CODE" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="EMP_COUNTRY_STATE" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="EMP_TPH_CONTACT_TYPE" Type="char" MaxLength="3" />
+          <Property Name="EMP_TPH_COMMUNICATION_TYPE" Type="char" MaxLength="3" />
+          <Property Name="EMP_TPH_NUMBER" Type="varchar2" MaxLength="20" />
+          <Property Name="SOURCE_OF_WEALTH" Type="varchar2" MaxLength="50" />
+          <Property Name="REASON" Type="varchar2" MaxLength="2000" Nullable="false" />
+          <Property Name="ACTION" Type="varchar2" MaxLength="2000" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="CTR_TRANSACTIONS" EntityType="Self.CTR_TRANSACTIONS" store:Type="Tables" store:Schema="AMLCORE">
+            <DefiningQuery>SELECT 
+"CTR_TRANSACTIONS"."TRANSACTIONNUMBER" AS "TRANSACTIONNUMBER", 
+"CTR_TRANSACTIONS"."TRANSACTION_DESCRIPTION" AS "TRANSACTION_DESCRIPTION", 
+"CTR_TRANSACTIONS"."DATE_TRANSACTION" AS "DATE_TRANSACTION", 
+"CTR_TRANSACTIONS"."TELLER" AS "TELLER", 
+"CTR_TRANSACTIONS"."AUTHORIZED" AS "AUTHORIZED", 
+"CTR_TRANSACTIONS"."LATE_DEPOSIT" AS "LATE_DEPOSIT", 
+"CTR_TRANSACTIONS"."DATE_POSTING" AS "DATE_POSTING", 
+"CTR_TRANSACTIONS"."TRANSMODE_CODE" AS "TRANSMODE_CODE", 
+"CTR_TRANSACTIONS"."AMOUNT_LOCAL" AS "AMOUNT_LOCAL", 
+"CTR_TRANSACTIONS"."FROM_FUNDS_CODE" AS "FROM_FUNDS_CODE", 
+"CTR_TRANSACTIONS"."FROM_FUNDS_COMMENTS" AS "FROM_FUNDS_COMMENTS", 
+"CTR_TRANSACTIONS"."FROM_INSTITUTION_NAME" AS "FROM_INSTITUTION_NAME", 
+"CTR_TRANSACTIONS"."FROM_INSTITUTION_CODE" AS "FROM_INSTITUTION_CODE", 
+"CTR_TRANSACTIONS"."FROM_ACCOUNT" AS "FROM_ACCOUNT", 
+"CTR_TRANSACTIONS"."FROM_ACCOUNT_NAME" AS "FROM_ACCOUNT_NAME", 
+"CTR_TRANSACTIONS"."FROM_COUNTRY" AS "FROM_COUNTRY", 
+"CTR_TRANSACTIONS"."TO_FUNDS_CODE" AS "TO_FUNDS_CODE", 
+"CTR_TRANSACTIONS"."TO_FUNDS_COMMENTS" AS "TO_FUNDS_COMMENTS", 
+"CTR_TRANSACTIONS"."TO_INSTITUTION_NAME" AS "TO_INSTITUTION_NAME", 
+"CTR_TRANSACTIONS"."TO_INSTITUTION_CODE" AS "TO_INSTITUTION_CODE", 
+"CTR_TRANSACTIONS"."TO_BRANCH" AS "TO_BRANCH", 
+"CTR_TRANSACTIONS"."TO_ACCOUNT" AS "TO_ACCOUNT", 
+"CTR_TRANSACTIONS"."TO_CURRENCY_CODE" AS "TO_CURRENCY_CODE", 
+"CTR_TRANSACTIONS"."TO_ACCOUNT_NAME" AS "TO_ACCOUNT_NAME", 
+"CTR_TRANSACTIONS"."TO_CLIENT_NUMBER" AS "TO_CLIENT_NUMBER", 
+"CTR_TRANSACTIONS"."PERSONAL_ACCOUNT_TYPE" AS "PERSONAL_ACCOUNT_TYPE", 
+"CTR_TRANSACTIONS"."ENT_NAME" AS "ENT_NAME", 
+"CTR_TRANSACTIONS"."ENT_INCORP_NO" AS "ENT_INCORP_NO", 
+"CTR_TRANSACTIONS"."ENT_BUSINESS" AS "ENT_BUSINESS", 
+"CTR_TRANSACTIONS"."ENT_CONTACT_TYPE" AS "ENT_CONTACT_TYPE", 
+"CTR_TRANSACTIONS"."ENT_COMM_TYPE" AS "ENT_COMM_TYPE", 
+"CTR_TRANSACTIONS"."ENT_PHONE" AS "ENT_PHONE", 
+"CTR_TRANSACTIONS"."ENT_ADDRSS_TYPE" AS "ENT_ADDRSS_TYPE", 
+"CTR_TRANSACTIONS"."ENT_ADDRESS" AS "ENT_ADDRESS", 
+"CTR_TRANSACTIONS"."ENT_CITY" AS "ENT_CITY", 
+"CTR_TRANSACTIONS"."ENT_COUNTRY_CODE" AS "ENT_COUNTRY_CODE", 
+"CTR_TRANSACTIONS"."ENT_STATE" AS "ENT_STATE", 
+"CTR_TRANSACTIONS"."ENT_INCORP_STATE" AS "ENT_INCORP_STATE", 
+"CTR_TRANSACTIONS"."ENT_INCORP_COUNTRY_CODE" AS "ENT_INCORP_COUNTRY_CODE", 
+"CTR_TRANSACTIONS"."ENT_DIR_1ST_NAME" AS "ENT_DIR_1ST_NAME", 
+"CTR_TRANSACTIONS"."ENT_DIR_LAST_NAME" AS "ENT_DIR_LAST_NAME", 
+"CTR_TRANSACTIONS"."SIGNATORY_TITLE" AS "SIGNATORY_TITLE", 
+"CTR_TRANSACTIONS"."SIGNATORY_FIRST_NAME" AS "SIGNATORY_FIRST_NAME", 
+"CTR_TRANSACTIONS"."SIGNATORY_LAST_NAME" AS "SIGNATORY_LAST_NAME", 
+"CTR_TRANSACTIONS"."SIGNATORY_DOB" AS "SIGNATORY_DOB", 
+"CTR_TRANSACTIONS"."SIGNATORY_NATIONALITY" AS "SIGNATORY_NATIONALITY", 
+"CTR_TRANSACTIONS"."SIGNATORY_RESIDENCE" AS "SIGNATORY_RESIDENCE", 
+"CTR_TRANSACTIONS"."SIGNATORY_OCCUPATION" AS "SIGNATORY_OCCUPATION", 
+"CTR_TRANSACTIONS"."TO_ACCT_OPENED" AS "TO_ACCT_OPENED", 
+"CTR_TRANSACTIONS"."TO_ACCT_BALANCE" AS "TO_ACCT_BALANCE", 
+"CTR_TRANSACTIONS"."TO_ACCT_STATUS_CODE" AS "TO_ACCT_STATUS_CODE", 
+"CTR_TRANSACTIONS"."TO_ACCOUNT_COUNTRY" AS "TO_ACCOUNT_COUNTRY", 
+"CTR_TRANSACTIONS"."CDI" AS "CDI", 
+"CTR_TRANSACTIONS"."PRIMARY_MEDIUM" AS "PRIMARY_MEDIUM", 
+"CTR_TRANSACTIONS"."DATE_KEY" AS "DATE_KEY", 
+"CTR_TRANSACTIONS"."FROM_PERSON_FIRST_NAME" AS "FROM_PERSON_FIRST_NAME", 
+"CTR_TRANSACTIONS"."FROM_PERSON_LAST_NAME" AS "FROM_PERSON_LAST_NAME", 
+"CTR_TRANSACTIONS"."TO_PERSON_FIRST_NAME" AS "TO_PERSON_FIRST_NAME", 
+"CTR_TRANSACTIONS"."TO_PERSON_LAST_NAME" AS "TO_PERSON_LAST_NAME", 
+"CTR_TRANSACTIONS"."AMOUNT_FOREIGN" AS "AMOUNT_FOREIGN", 
+"CTR_TRANSACTIONS"."CODE_FROM_TRANS" AS "CODE_FROM_TRANS", 
+"CTR_TRANSACTIONS"."FIRST_NAME" AS "FIRST_NAME", 
+"CTR_TRANSACTIONS"."LAST_NAME" AS "LAST_NAME", 
+"CTR_TRANSACTIONS"."POLARIS_ACCOUNT" AS "POLARIS_ACCOUNT", 
+"CTR_TRANSACTIONS"."BANK_CUST_BRANCH" AS "BANK_CUST_BRANCH", 
+"CTR_TRANSACTIONS"."BANK_CUST_NAME" AS "BANK_CUST_NAME", 
+"CTR_TRANSACTIONS"."BANK_NAME" AS "BANK_NAME", 
+"CTR_TRANSACTIONS"."BANK_CODE" AS "BANK_CODE", 
+"CTR_TRANSACTIONS"."BANK_SWIFT_CODE" AS "BANK_SWIFT_CODE", 
+"CTR_TRANSACTIONS"."EXTERNAL_ACC" AS "EXTERNAL_ACC"
+FROM "AMLCORE"."CTR_TRANSACTIONS" "CTR_TRANSACTIONS"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="REPORT_ENTITY" EntityType="Self.REPORT_ENTITY" store:Type="Tables" store:Schema="AMLCORE">
+            <DefiningQuery>SELECT 
+"REPORT_ENTITY"."RENTITY_ID" AS "RENTITY_ID", 
+"REPORT_ENTITY"."SUBMISSION_CODE" AS "SUBMISSION_CODE", 
+"REPORT_ENTITY"."REPORT_CODE" AS "REPORT_CODE", 
+"REPORT_ENTITY"."SUBMISSION_DATE" AS "SUBMISSION_DATE", 
+"REPORT_ENTITY"."CURRENCY_CODE_LOCAL" AS "CURRENCY_CODE_LOCAL", 
+"REPORT_ENTITY"."GENDER" AS "GENDER", 
+"REPORT_ENTITY"."E_TITLE" AS "E_TITLE", 
+"REPORT_ENTITY"."E_FIRST_NAME" AS "E_FIRST_NAME", 
+"REPORT_ENTITY"."E_MIDDLE_NAME" AS "E_MIDDLE_NAME", 
+"REPORT_ENTITY"."E_LAST_NAME" AS "E_LAST_NAME", 
+"REPORT_ENTITY"."E_BIRTHDATE" AS "E_BIRTHDATE", 
+"REPORT_ENTITY"."BIRTH_PLACE" AS "BIRTH_PLACE", 
+"REPORT_ENTITY"."MOTHERS_NAME" AS "MOTHERS_NAME", 
+"REPORT_ENTITY"."PASSPORT_NUMBER" AS "PASSPORT_NUMBER", 
+"REPORT_ENTITY"."PASSPORT_COUNTRY" AS "PASSPORT_COUNTRY", 
+"REPORT_ENTITY"."ID_NUMBER" AS "ID_NUMBER", 
+"REPORT_ENTITY"."E_NATIONALITY1" AS "E_NATIONALITY1", 
+"REPORT_ENTITY"."RESISDENCE" AS "RESISDENCE", 
+"REPORT_ENTITY"."TPH_CONTACT_TYPE" AS "TPH_CONTACT_TYPE", 
+"REPORT_ENTITY"."TPH_COMMUNICATION_TYPE" AS "TPH_COMMUNICATION_TYPE", 
+"REPORT_ENTITY"."TPH_NUMBER" AS "TPH_NUMBER", 
+"REPORT_ENTITY"."ADDRESS_TYPE" AS "ADDRESS_TYPE", 
+"REPORT_ENTITY"."ADDRESS" AS "ADDRESS", 
+"REPORT_ENTITY"."CITY" AS "CITY", 
+"REPORT_ENTITY"."COUNTRY_CODE" AS "COUNTRY_CODE", 
+"REPORT_ENTITY"."COUNTRY_STATE" AS "COUNTRY_STATE", 
+"REPORT_ENTITY"."EMAIL" AS "EMAIL", 
+"REPORT_ENTITY"."OCCUPATION" AS "OCCUPATION", 
+"REPORT_ENTITY"."EMP_NAME" AS "EMP_NAME", 
+"REPORT_ENTITY"."EMP_ADDRESS_TYPE" AS "EMP_ADDRESS_TYPE", 
+"REPORT_ENTITY"."EMP_ADDRESS" AS "EMP_ADDRESS", 
+"REPORT_ENTITY"."EMP_CITY" AS "EMP_CITY", 
+"REPORT_ENTITY"."EMP_COUNTRY_CODE" AS "EMP_COUNTRY_CODE", 
+"REPORT_ENTITY"."EMP_COUNTRY_STATE" AS "EMP_COUNTRY_STATE", 
+"REPORT_ENTITY"."EMP_TPH_CONTACT_TYPE" AS "EMP_TPH_CONTACT_TYPE", 
+"REPORT_ENTITY"."EMP_TPH_COMMUNICATION_TYPE" AS "EMP_TPH_COMMUNICATION_TYPE", 
+"REPORT_ENTITY"."EMP_TPH_NUMBER" AS "EMP_TPH_NUMBER", 
+"REPORT_ENTITY"."SOURCE_OF_WEALTH" AS "SOURCE_OF_WEALTH", 
+"REPORT_ENTITY"."REASON" AS "REASON", 
+"REPORT_ENTITY"."ACTION" AS "ACTION"
+FROM "AMLCORE"."REPORT_ENTITY" "REPORT_ENTITY"</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CTR_TRANSACTIONS">
+          <Key>
+            <PropertyRef Name="TRANSACTIONNUMBER" />
+            <PropertyRef Name="AMOUNT_LOCAL" />
+            <PropertyRef Name="TO_CURRENCY_CODE" />
+            <PropertyRef Name="TO_ACCOUNT_COUNTRY" />
+          </Key>
+          <Property Name="TRANSACTIONNUMBER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TRANSACTION_DESCRIPTION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_TRANSACTION" Type="DateTime" Precision="6" />
+          <Property Name="TELLER" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="AUTHORIZED" Type="String" MaxLength="13" FixedLength="true" Unicode="false" />
+          <Property Name="LATE_DEPOSIT" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_POSTING" Type="DateTime" />
+          <Property Name="TRANSMODE_CODE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="AMOUNT_LOCAL" Type="Decimal" Precision="18" Scale="5" Nullable="false" />
+          <Property Name="FROM_FUNDS_CODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="FROM_FUNDS_COMMENTS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FROM_INSTITUTION_NAME" Type="String" MaxLength="450" FixedLength="false" Unicode="false" />
+          <Property Name="FROM_INSTITUTION_CODE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FROM_ACCOUNT" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
+          <Property Name="FROM_ACCOUNT_NAME" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="FROM_COUNTRY" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="TO_FUNDS_CODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="TO_FUNDS_COMMENTS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TO_INSTITUTION_NAME" Type="String" MaxLength="450" FixedLength="false" Unicode="false" />
+          <Property Name="TO_INSTITUTION_CODE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TO_BRANCH" Type="String" MaxLength="143" FixedLength="false" Unicode="false" />
+          <Property Name="TO_ACCOUNT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="TO_CURRENCY_CODE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TO_ACCOUNT_NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TO_CLIENT_NUMBER" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="PERSONAL_ACCOUNT_TYPE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ENT_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ENT_INCORP_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ENT_BUSINESS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ENT_CONTACT_TYPE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="ENT_COMM_TYPE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="ENT_PHONE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ENT_ADDRSS_TYPE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="ENT_ADDRESS" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ENT_CITY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ENT_COUNTRY_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ENT_STATE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="ENT_INCORP_STATE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="ENT_INCORP_COUNTRY_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ENT_DIR_1ST_NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ENT_DIR_LAST_NAME" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="SIGNATORY_TITLE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="SIGNATORY_FIRST_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SIGNATORY_LAST_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SIGNATORY_DOB" Type="DateTime" />
+          <Property Name="SIGNATORY_NATIONALITY" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="SIGNATORY_RESIDENCE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="SIGNATORY_OCCUPATION" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="TO_ACCT_OPENED" Type="DateTime" />
+          <Property Name="TO_ACCT_BALANCE" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="TO_ACCT_STATUS_CODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="TO_ACCOUNT_COUNTRY" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CDI" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PRIMARY_MEDIUM" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_KEY" Type="Int32" />
+          <Property Name="FROM_PERSON_FIRST_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FROM_PERSON_LAST_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TO_PERSON_FIRST_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TO_PERSON_LAST_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AMOUNT_FOREIGN" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="CODE_FROM_TRANS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FIRST_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="POLARIS_ACCOUNT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BANK_CUST_BRANCH" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="BANK_CUST_NAME" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="BANK_NAME" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="BANK_CODE" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="BANK_SWIFT_CODE" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="EXTERNAL_ACC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="REPORT_ENTITY">
+          <Key>
+            <PropertyRef Name="SUBMISSION_CODE" />
+            <PropertyRef Name="REPORT_CODE" />
+            <PropertyRef Name="SUBMISSION_DATE" />
+            <PropertyRef Name="CURRENCY_CODE_LOCAL" />
+            <PropertyRef Name="GENDER" />
+            <PropertyRef Name="E_FIRST_NAME" />
+            <PropertyRef Name="E_MIDDLE_NAME" />
+            <PropertyRef Name="E_LAST_NAME" />
+            <PropertyRef Name="E_BIRTHDATE" />
+            <PropertyRef Name="E_NATIONALITY1" />
+            <PropertyRef Name="ADDRESS" />
+            <PropertyRef Name="CITY" />
+            <PropertyRef Name="COUNTRY_CODE" />
+            <PropertyRef Name="COUNTRY_STATE" />
+            <PropertyRef Name="EMP_NAME" />
+            <PropertyRef Name="EMP_ADDRESS" />
+            <PropertyRef Name="EMP_CITY" />
+            <PropertyRef Name="EMP_COUNTRY_CODE" />
+            <PropertyRef Name="EMP_COUNTRY_STATE" />
+            <PropertyRef Name="REASON" />
+            <PropertyRef Name="ACTION" />
+          </Key>
+          <Property Name="RENTITY_ID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="SUBMISSION_CODE" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="REPORT_CODE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="SUBMISSION_DATE" Type="DateTime" Precision="6" Nullable="false" />
+          <Property Name="CURRENCY_CODE_LOCAL" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="GENDER" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="E_TITLE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="E_FIRST_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="E_MIDDLE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="E_LAST_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="E_BIRTHDATE" Type="DateTime" Nullable="false" />
+          <Property Name="BIRTH_PLACE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MOTHERS_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PASSPORT_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PASSPORT_COUNTRY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ID_NUMBER" Type="Decimal" Precision="20" Scale="0" />
+          <Property Name="E_NATIONALITY1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RESISDENCE" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="TPH_CONTACT_TYPE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="TPH_COMMUNICATION_TYPE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="TPH_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ADDRESS_TYPE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="ADDRESS" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CITY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COUNTRY_CODE" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="COUNTRY_STATE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OCCUPATION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EMP_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMP_ADDRESS_TYPE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="EMP_ADDRESS" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMP_CITY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMP_COUNTRY_CODE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EMP_COUNTRY_STATE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMP_TPH_CONTACT_TYPE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="EMP_TPH_COMMUNICATION_TYPE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="EMP_TPH_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SOURCE_OF_WEALTH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="REASON" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ACTION" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CTR_TRANSACTIONS" EntityType="Self.CTR_TRANSACTIONS" />
+          <EntitySet Name="REPORT_ENTITY" EntityType="Self.REPORT_ENTITY" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="CTR_TRANSACTIONS">
+            <EntityTypeMapping TypeName="Model.CTR_TRANSACTIONS">
+              <MappingFragment StoreEntitySet="CTR_TRANSACTIONS">
+                <ScalarProperty Name="TRANSACTIONNUMBER" ColumnName="TRANSACTIONNUMBER" />
+                <ScalarProperty Name="TRANSACTION_DESCRIPTION" ColumnName="TRANSACTION_DESCRIPTION" />
+                <ScalarProperty Name="DATE_TRANSACTION" ColumnName="DATE_TRANSACTION" />
+                <ScalarProperty Name="TELLER" ColumnName="TELLER" />
+                <ScalarProperty Name="AUTHORIZED" ColumnName="AUTHORIZED" />
+                <ScalarProperty Name="LATE_DEPOSIT" ColumnName="LATE_DEPOSIT" />
+                <ScalarProperty Name="DATE_POSTING" ColumnName="DATE_POSTING" />
+                <ScalarProperty Name="TRANSMODE_CODE" ColumnName="TRANSMODE_CODE" />
+                <ScalarProperty Name="AMOUNT_LOCAL" ColumnName="AMOUNT_LOCAL" />
+                <ScalarProperty Name="FROM_FUNDS_CODE" ColumnName="FROM_FUNDS_CODE" />
+                <ScalarProperty Name="FROM_FUNDS_COMMENTS" ColumnName="FROM_FUNDS_COMMENTS" />
+                <ScalarProperty Name="FROM_INSTITUTION_NAME" ColumnName="FROM_INSTITUTION_NAME" />
+                <ScalarProperty Name="FROM_INSTITUTION_CODE" ColumnName="FROM_INSTITUTION_CODE" />
+                <ScalarProperty Name="FROM_ACCOUNT" ColumnName="FROM_ACCOUNT" />
+                <ScalarProperty Name="FROM_ACCOUNT_NAME" ColumnName="FROM_ACCOUNT_NAME" />
+                <ScalarProperty Name="FROM_COUNTRY" ColumnName="FROM_COUNTRY" />
+                <ScalarProperty Name="TO_FUNDS_CODE" ColumnName="TO_FUNDS_CODE" />
+                <ScalarProperty Name="TO_FUNDS_COMMENTS" ColumnName="TO_FUNDS_COMMENTS" />
+                <ScalarProperty Name="TO_INSTITUTION_NAME" ColumnName="TO_INSTITUTION_NAME" />
+                <ScalarProperty Name="TO_INSTITUTION_CODE" ColumnName="TO_INSTITUTION_CODE" />
+                <ScalarProperty Name="TO_BRANCH" ColumnName="TO_BRANCH" />
+                <ScalarProperty Name="TO_ACCOUNT" ColumnName="TO_ACCOUNT" />
+                <ScalarProperty Name="TO_CURRENCY_CODE" ColumnName="TO_CURRENCY_CODE" />
+                <ScalarProperty Name="TO_ACCOUNT_NAME" ColumnName="TO_ACCOUNT_NAME" />
+                <ScalarProperty Name="TO_CLIENT_NUMBER" ColumnName="TO_CLIENT_NUMBER" />
+                <ScalarProperty Name="PERSONAL_ACCOUNT_TYPE" ColumnName="PERSONAL_ACCOUNT_TYPE" />
+                <ScalarProperty Name="ENT_NAME" ColumnName="ENT_NAME" />
+                <ScalarProperty Name="ENT_INCORP_NO" ColumnName="ENT_INCORP_NO" />
+                <ScalarProperty Name="ENT_BUSINESS" ColumnName="ENT_BUSINESS" />
+                <ScalarProperty Name="ENT_CONTACT_TYPE" ColumnName="ENT_CONTACT_TYPE" />
+                <ScalarProperty Name="ENT_COMM_TYPE" ColumnName="ENT_COMM_TYPE" />
+                <ScalarProperty Name="ENT_PHONE" ColumnName="ENT_PHONE" />
+                <ScalarProperty Name="ENT_ADDRSS_TYPE" ColumnName="ENT_ADDRSS_TYPE" />
+                <ScalarProperty Name="ENT_ADDRESS" ColumnName="ENT_ADDRESS" />
+                <ScalarProperty Name="ENT_CITY" ColumnName="ENT_CITY" />
+                <ScalarProperty Name="ENT_COUNTRY_CODE" ColumnName="ENT_COUNTRY_CODE" />
+                <ScalarProperty Name="ENT_STATE" ColumnName="ENT_STATE" />
+                <ScalarProperty Name="ENT_INCORP_STATE" ColumnName="ENT_INCORP_STATE" />
+                <ScalarProperty Name="ENT_INCORP_COUNTRY_CODE" ColumnName="ENT_INCORP_COUNTRY_CODE" />
+                <ScalarProperty Name="ENT_DIR_1ST_NAME" ColumnName="ENT_DIR_1ST_NAME" />
+                <ScalarProperty Name="ENT_DIR_LAST_NAME" ColumnName="ENT_DIR_LAST_NAME" />
+                <ScalarProperty Name="SIGNATORY_TITLE" ColumnName="SIGNATORY_TITLE" />
+                <ScalarProperty Name="SIGNATORY_FIRST_NAME" ColumnName="SIGNATORY_FIRST_NAME" />
+                <ScalarProperty Name="SIGNATORY_LAST_NAME" ColumnName="SIGNATORY_LAST_NAME" />
+                <ScalarProperty Name="SIGNATORY_DOB" ColumnName="SIGNATORY_DOB" />
+                <ScalarProperty Name="SIGNATORY_NATIONALITY" ColumnName="SIGNATORY_NATIONALITY" />
+                <ScalarProperty Name="SIGNATORY_RESIDENCE" ColumnName="SIGNATORY_RESIDENCE" />
+                <ScalarProperty Name="SIGNATORY_OCCUPATION" ColumnName="SIGNATORY_OCCUPATION" />
+                <ScalarProperty Name="TO_ACCT_OPENED" ColumnName="TO_ACCT_OPENED" />
+                <ScalarProperty Name="TO_ACCT_BALANCE" ColumnName="TO_ACCT_BALANCE" />
+                <ScalarProperty Name="TO_ACCT_STATUS_CODE" ColumnName="TO_ACCT_STATUS_CODE" />
+                <ScalarProperty Name="TO_ACCOUNT_COUNTRY" ColumnName="TO_ACCOUNT_COUNTRY" />
+                <ScalarProperty Name="CDI" ColumnName="CDI" />
+                <ScalarProperty Name="PRIMARY_MEDIUM" ColumnName="PRIMARY_MEDIUM" />
+                <ScalarProperty Name="DATE_KEY" ColumnName="DATE_KEY" />
+                <ScalarProperty Name="FROM_PERSON_FIRST_NAME" ColumnName="FROM_PERSON_FIRST_NAME" />
+                <ScalarProperty Name="FROM_PERSON_LAST_NAME" ColumnName="FROM_PERSON_LAST_NAME" />
+                <ScalarProperty Name="TO_PERSON_FIRST_NAME" ColumnName="TO_PERSON_FIRST_NAME" />
+                <ScalarProperty Name="TO_PERSON_LAST_NAME" ColumnName="TO_PERSON_LAST_NAME" />
+                <ScalarProperty Name="AMOUNT_FOREIGN" ColumnName="AMOUNT_FOREIGN" />
+                <ScalarProperty Name="CODE_FROM_TRANS" ColumnName="CODE_FROM_TRANS" />
+                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+                <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+                <ScalarProperty Name="POLARIS_ACCOUNT" ColumnName="POLARIS_ACCOUNT" />
+                <ScalarProperty Name="BANK_CUST_BRANCH" ColumnName="BANK_CUST_BRANCH" />
+                <ScalarProperty Name="BANK_CUST_NAME" ColumnName="BANK_CUST_NAME" />
+                <ScalarProperty Name="BANK_NAME" ColumnName="BANK_NAME" />
+                <ScalarProperty Name="BANK_CODE" ColumnName="BANK_CODE" />
+                <ScalarProperty Name="BANK_SWIFT_CODE" ColumnName="BANK_SWIFT_CODE" />
+                <ScalarProperty Name="EXTERNAL_ACC" ColumnName="EXTERNAL_ACC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REPORT_ENTITY">
+            <EntityTypeMapping TypeName="Model.REPORT_ENTITY">
+              <MappingFragment StoreEntitySet="REPORT_ENTITY">
+                <ScalarProperty Name="RENTITY_ID" ColumnName="RENTITY_ID" />
+                <ScalarProperty Name="SUBMISSION_CODE" ColumnName="SUBMISSION_CODE" />
+                <ScalarProperty Name="REPORT_CODE" ColumnName="REPORT_CODE" />
+                <ScalarProperty Name="SUBMISSION_DATE" ColumnName="SUBMISSION_DATE" />
+                <ScalarProperty Name="CURRENCY_CODE_LOCAL" ColumnName="CURRENCY_CODE_LOCAL" />
+                <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+                <ScalarProperty Name="E_TITLE" ColumnName="E_TITLE" />
+                <ScalarProperty Name="E_FIRST_NAME" ColumnName="E_FIRST_NAME" />
+                <ScalarProperty Name="E_MIDDLE_NAME" ColumnName="E_MIDDLE_NAME" />
+                <ScalarProperty Name="E_LAST_NAME" ColumnName="E_LAST_NAME" />
+                <ScalarProperty Name="E_BIRTHDATE" ColumnName="E_BIRTHDATE" />
+                <ScalarProperty Name="BIRTH_PLACE" ColumnName="BIRTH_PLACE" />
+                <ScalarProperty Name="MOTHERS_NAME" ColumnName="MOTHERS_NAME" />
+                <ScalarProperty Name="PASSPORT_NUMBER" ColumnName="PASSPORT_NUMBER" />
+                <ScalarProperty Name="PASSPORT_COUNTRY" ColumnName="PASSPORT_COUNTRY" />
+                <ScalarProperty Name="ID_NUMBER" ColumnName="ID_NUMBER" />
+                <ScalarProperty Name="E_NATIONALITY1" ColumnName="E_NATIONALITY1" />
+                <ScalarProperty Name="RESISDENCE" ColumnName="RESISDENCE" />
+                <ScalarProperty Name="TPH_CONTACT_TYPE" ColumnName="TPH_CONTACT_TYPE" />
+                <ScalarProperty Name="TPH_COMMUNICATION_TYPE" ColumnName="TPH_COMMUNICATION_TYPE" />
+                <ScalarProperty Name="TPH_NUMBER" ColumnName="TPH_NUMBER" />
+                <ScalarProperty Name="ADDRESS_TYPE" ColumnName="ADDRESS_TYPE" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="CITY" ColumnName="CITY" />
+                <ScalarProperty Name="COUNTRY_CODE" ColumnName="COUNTRY_CODE" />
+                <ScalarProperty Name="COUNTRY_STATE" ColumnName="COUNTRY_STATE" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="OCCUPATION" ColumnName="OCCUPATION" />
+                <ScalarProperty Name="EMP_NAME" ColumnName="EMP_NAME" />
+                <ScalarProperty Name="EMP_ADDRESS_TYPE" ColumnName="EMP_ADDRESS_TYPE" />
+                <ScalarProperty Name="EMP_ADDRESS" ColumnName="EMP_ADDRESS" />
+                <ScalarProperty Name="EMP_CITY" ColumnName="EMP_CITY" />
+                <ScalarProperty Name="EMP_COUNTRY_CODE" ColumnName="EMP_COUNTRY_CODE" />
+                <ScalarProperty Name="EMP_COUNTRY_STATE" ColumnName="EMP_COUNTRY_STATE" />
+                <ScalarProperty Name="EMP_TPH_CONTACT_TYPE" ColumnName="EMP_TPH_CONTACT_TYPE" />
+                <ScalarProperty Name="EMP_TPH_COMMUNICATION_TYPE" ColumnName="EMP_TPH_COMMUNICATION_TYPE" />
+                <ScalarProperty Name="EMP_TPH_NUMBER" ColumnName="EMP_TPH_NUMBER" />
+                <ScalarProperty Name="SOURCE_OF_WEALTH" ColumnName="SOURCE_OF_WEALTH" />
+                <ScalarProperty Name="REASON" ColumnName="REASON" />
+                <ScalarProperty Name="ACTION" ColumnName="ACTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

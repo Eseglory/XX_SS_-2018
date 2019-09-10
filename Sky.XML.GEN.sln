@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMD", "CMD\CMD.csproj", "{6E0B5D81-6883-46D6-9DDA-4C9F8F1FF5F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AML.REPORT.GENERATOR", "AML.REPORT.GENERATOR\AML.REPORT.GENERATOR.csproj", "{2E34A4C8-130E-487E-9D03-CD2A42EA2BF7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E0B5D81-6883-46D6-9DDA-4C9F8F1FF5F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E0B5D81-6883-46D6-9DDA-4C9F8F1FF5F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E0B5D81-6883-46D6-9DDA-4C9F8F1FF5F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E0B5D81-6883-46D6-9DDA-4C9F8F1FF5F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E34A4C8-130E-487E-9D03-CD2A42EA2BF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E34A4C8-130E-487E-9D03-CD2A42EA2BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E34A4C8-130E-487E-9D03-CD2A42EA2BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E34A4C8-130E-487E-9D03-CD2A42EA2BF7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BE3A13C6-A78F-46E9-BA27-3AC006ADC618}
+	EndGlobalSection
+EndGlobal
